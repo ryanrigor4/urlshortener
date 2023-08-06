@@ -35,7 +35,7 @@ def getLinks(conn, query):
     try:
         c = conn.cursor()
         c.execute(query)
-        urls = c.fetchall()
+        urls = c.fetchOne()
         print(urls)
         return urls
     except Error as e:
