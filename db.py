@@ -13,6 +13,14 @@ def createConnection(directory):
     except:
         print("Connection Failed!")
 
+def fetchRedirect(conn, query, key):
+    try:
+        c = conn.cursor()
+        c.execute(query, (key,))
+        return c.fetchall()
+    except Error as e:
+        print(e)
+
 def createTable(conn, table):
     try:
         c = conn.cursor()
@@ -49,3 +57,14 @@ def deleteLinks(conn,query):
         conn.commit()
     except Error as e:
         print(e)
+
+        
+def deleteLink(conn,query,key):
+    print(f"Query: {query}")
+    try:
+        c = conn.cursor()
+        c.execute(query, (key,))
+        conn.commit()
+    except Error as e:
+        print(e)
+
