@@ -1,6 +1,7 @@
 from calendar import c
-import sqlite3
 from sqlite3 import Error
+import sqlite3
+
 
 dbDirectory = "/Users/ryanrigor/Documents/projects/personal/urlshortener/sqlite.db"
 
@@ -35,8 +36,16 @@ def getLinks(conn, query):
     try:
         c = conn.cursor()
         c.execute(query)
-        urls = c.fetchOne()
-        print(urls)
+        urls = c.fetchall()
         return urls
+    except Error as e:
+        print(e)
+
+def deleteLinks(conn,query):
+    print(f"Query: {query}")
+    try:
+        c = conn.cursor()
+        c.execute(query)
+        conn.commit()
     except Error as e:
         print(e)
