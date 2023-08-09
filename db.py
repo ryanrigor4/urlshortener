@@ -1,9 +1,5 @@
-from calendar import c
 from sqlite3 import Error
 import sqlite3
-
-
-dbDirectory = "/Users/ryanrigor/Documents/projects/personal/urlshortener/sqlite.db"
 
 def createConnection(directory):
     try:
@@ -67,4 +63,3 @@ def deleteLink(conn,query,key):
         conn.commit()
     except Error as e:
         print(e)
-

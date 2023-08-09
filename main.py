@@ -1,11 +1,13 @@
-from urllib import request
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from db import createTable,insertLink,getLinks,createConnection,deleteLinks,fetchRedirect,deleteLink
+from db import insertLink,getLinks,createConnection,deleteLinks,fetchRedirect,deleteLink
 from pydantic import BaseModel
-import string, random, sqlite3
+import string, random, os
+from dotenv import load_dotenv
 
-dbDirectory = "/Users/ryanrigor/Documents/projects/personal/urlshortener/sqlite.db"
+load_dotenv()
+
+dbDirectory = os.getenv('DB_DIRECTORY')
 
 requestTable = """CREATE TABLE IF NOT EXISTS url (
 original text,
