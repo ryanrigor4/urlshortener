@@ -4,26 +4,18 @@ from db import insertLink,getLinks,createConnection,deleteLinks,fetchRedirect,de
 from pydantic import BaseModel
 import string, random, os
 from dotenv import load_dotenv
+from generator import id_generator
 
+#loads env file and stores DB_DIRECTORY into variable dbDriectroy
 load_dotenv()
-
 dbDirectory = os.getenv('DB_DIRECTORY')
 
-requestTable = """CREATE TABLE IF NOT EXISTS url (
-original text,
-redirect text
-);"""
-
-#generates redirect key
-def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+app = FastAPI()
 
 #request body
 class url(BaseModel):
     original: str = ""
     redirect: str = ""
-
-app = FastAPI()
 
 @app.delete("/deleteall")
 async def deleteAll():
